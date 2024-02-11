@@ -1,0 +1,154 @@
+
+import pygame
+
+# pygame setup
+pygame.init()
+
+pygame.display.set_caption("JELLO")
+
+screen = pygame.display.set_mode((1280, 720))
+                                #pygame.RESIZABLE)
+
+clock = pygame.time.Clock()
+
+running = True
+
+dt = 0
+
+player_pos = pygame.Vector2(screen.get_width() / 10, screen.get_height() / 10)
+
+while running:
+    # poll for events
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+
+    screen.fill("grey")
+
+    pygame.draw.circle(screen, "black", player_pos, 40)
+
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_w]:
+        player_pos.y -= 300 * dt
+    if keys[pygame.K_s]:
+        player_pos.y += 300 * dt
+    if keys[pygame.K_a]:
+        player_pos.x -= 300 * dt
+    if keys[pygame.K_d]:
+        player_pos.x += 300 * dt
+
+
+    pygame.display.flip()
+    dt = clock.tick(60) / 1000
+
+pygame.quit()
+
+
+
+# Importing pygame module
+import pygame
+from pygame.locals import *
+
+# initiate pygame and give permission
+# to use pygame's functionality.
+pygame.init()
+
+# create the display surface object
+# of specific dimension.
+window = pygame.display.set_mode((600, 600),
+                                 RESIZABLE)
+
+# Fill the scree with white color
+window.fill(("black"))
+
+# creating list in which we will store
+# the position of the circle
+circle_positions = []
+
+# radius of the circle
+circle_radius = 30
+
+# Color of the circle
+color = ("white")
+
+# Creating a variable which we will use
+# to run the while loop
+run = True
+
+# Creating a while loop
+while run:
+
+    # Iterating over all the events received from
+    # pygame.event.get()
+    for event in pygame.event.get():
+
+        # If the type of the event is quit
+        # then setting the run variable to false
+        if event.type == QUIT:
+            run = False
+
+        # if the type of the event is MOUSEBUTTONDOWN
+        # then storing the current position
+        elif event.type == MOUSEBUTTONDOWN:
+            position = event.pos
+            circle_positions.append(position)
+
+    # Using for loop to iterate
+    # over the circle_positions
+    # list
+    for position in circle_positions:
+        # Drawing the circle
+        pygame.draw.circle(window, color, position,
+                           circle_radius)
+
+    # Draws the surface object to the screen.
+    pygame.display.update()
+
+
+import pygame
+
+# pygame setup
+pygame.init()
+
+pygame.display.set_caption("JELLO")
+
+screen = pygame.display.set_mode((1280, 720))
+
+
+
+clock = pygame.time.Clock()
+
+running = True
+
+dt = 0
+
+player_pos = pygame.Vector2(screen.get_width() / 10, screen.get_height() / 10)
+
+while running:
+    # poll for events
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+
+    screen.fill("grey")
+
+    pygame.draw.circle(screen, "black", player_pos, 100)
+
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_w]:
+        player_pos.y -= 300 * dt
+    if keys[pygame.K_s]:
+        player_pos.y += 300 * dt
+    if keys[pygame.K_a]:
+        player_pos.x -= 300 * dt
+    if keys[pygame.K_d]:
+        player_pos.x += 300 * dt
+
+
+    pygame.display.flip()
+    dt = clock.tick(60) / 1000
+
+pygame.quit()
+
