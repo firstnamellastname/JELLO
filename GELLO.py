@@ -1,5 +1,5 @@
 import pygame as pg
-
+import math
 # pygame setup
 pg.init()
 
@@ -10,7 +10,8 @@ image_height = 40
 image_width = 40
 screen_colour = (0, 0, 0)
 screen = pg.display.set_mode((width, height))
-
+hbox = 350
+vbox = 350
 x = width/2
 y = height/2
 
@@ -39,14 +40,21 @@ while running:
     keys = pg.key.get_pressed()
     if keys[pg.K_w]:
         y -= 300 * dt
+    if y < 0: y = 0
+
     if keys[pg.K_s]:
         y += 300 * dt
+    if y > height - hbox: y = height - vbox
+
     if keys[pg.K_a]:
         x -= 300 * dt
+    if x < 0: x = 0
+
     if keys[pg.K_d]:
         x += 300 * dt
+    if x > width - hbox: x = width - hbox
 
-    pg.draw.rect(screen ,"white" , pg.Rect(435,200,350,350 ), 4)
+    pg.draw.rect(screen ,"white" , pg.Rect(435,200,hbox,vbox ), 4)
     pg.display.flip()
     dt = clock.tick(60) / 1000
 

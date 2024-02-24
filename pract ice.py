@@ -1,23 +1,51 @@
-import pygame as pg
+import pygame
+
+pygame.init()
+
+WIDTH = 600
+HEIGHT = 600
+wn = pygame.display.set_mode((WIDTH, HEIGHT))
 
 
-pg.init()
-screen = pg.display.set_mode((640, 480))
-clock = pg.time.Clock()
-BG_COLOR = pg.Color('gray12')
+class Player:
+    def __init__(self):
+        self.speed = 1
+        self.width = 20
+        self.height = 20
+        self.color = (255, 255, 0)
+        self.rect = pygame.Rect((WIDTH - self.width) / 2, (HEIGHT - self.height) / 2, 20, 20)
 
-rect1 = pg.Rect(200, 100, 161, 100)
-rect2 = pg.Rect(0, 0, 120, 74)
-rect2.center = rect1.center
+    def up(self):
+        self.rect.y = max([self.rect.y - self.speed, 0])
 
-done = False
-while not done:
-    for event in pg.event.get():
-        if event.type == pg.QUIT:
-            done = True
+    def down(self):
+        self.rect.y = min([self.rect.y + self.speed, HEIGHT - self.height])
 
-    screen.fill(BG_COLOR)
-    pg.draw.rect(screen, (0, 100, 255), rect1, 2)
-    pg.draw.rect(screen, (255, 128, 0), rect2, 2)
-    pg.display.flip()
-    clock.tick(60)
+    def left(self):
+        self.rect.x = max([self.rect.x - self.speed, 0])
+
+    def right(self):
+        self.rect.x = min([self.rect.x + self.speed, WIDTH - self.width])
+
+    def draw(self):
+        pygame.draw.rect(wn, self.color, self.rect)
+
+
+char = Player()
+
+while True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_w]:
+        char.up()
+    if keys[pygame.K_s]:
+        char.down()
+    if keys[pygame.K_a]:
+        char.left()
+    if keys[pygame.K_d]:
+        char.right()
+    wn.fill((0, 0, 0))
+    char.draw()
+    pygame.display.update()
