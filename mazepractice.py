@@ -2,7 +2,7 @@ import random, sys, time, pygame
 from pygame.locals import *
 from random import *
 
-
+#fjf
 def gcd(a, b):
     while b:
         a, b = b, a%b
