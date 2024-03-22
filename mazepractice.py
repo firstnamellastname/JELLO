@@ -53,9 +53,7 @@ def is_border(coordinates, direction):
         else:
             return False
     else:
-        print('You are safe from the end of the fucking world')
         return False
-    print('Unexpected error in determining border location. You should probably fix that')
 
 def is_wall(dire):
     if is_border(player_pos, dire) == False:

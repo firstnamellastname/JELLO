@@ -60,3 +60,7 @@ while running:
 
 pg.quit()
 
+
+### scrap the box, instead of having an border right makke the whole screen the arena
+## then just border around the whole screen, replace the heart with a rectangle, add pathtracking projectiles that you
+# have to dogde     
