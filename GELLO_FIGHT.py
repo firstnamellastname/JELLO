@@ -1,9 +1,9 @@
 import pygame as pg
-import math
+import random
 # pygame setup
 pg.init()
-
-pg.display.set_caption("JELLO")
+print(random.randint(1,22))
+pg.display.set_caption("FIGHT FIGHT FIGHT")
 width = 1200
 height = 720
 image_height = 40
@@ -24,7 +24,7 @@ dt = 0
 player_pos = pg.Vector2(screen.get_width() / 10, screen.get_height() / 10)
 
 while running:
-    # poll for events
+    # check for events
     for event in pg.event.get():
         if event.type == pg.QUIT:
             running = False
@@ -35,32 +35,33 @@ while running:
     heart_sprite = pg.image.load("Undertaleheart.png")
     IMAGE_SIZE = (image_width,image_height)
     heart_sprite = pg.transform.scale(heart_sprite, IMAGE_SIZE)
+    pg.draw.rect(screen, (0, 0, 0), (x, y, image_width, image_height))
     screen.blit(heart_sprite, (x, y))
 
     keys = pg.key.get_pressed()
-    if keys[pg.K_w]:
-        y -= 300 * dt
-    if y < 0: y = 0
+    if keys[pg.K_w] and y > dt:
+            y -= 300 * dt
 
-    if keys[pg.K_s]:
-        y += 300 * dt
-    if y > height - hbox: y = height - vbox
 
-    if keys[pg.K_a]:
-        x -= 300 * dt
-    if x < 0: x = 0
+    if keys[pg.K_s] and y < (height - image_height - dt):
+            y += 300 * dt
 
-    if keys[pg.K_d]:
-        x += 300 * dt
-    if x > width - hbox: x = width - hbox
 
-    pg.draw.rect(screen ,"white" , pg.Rect(435,200,hbox,vbox ), 4)
+    if keys[pg.K_a] and x > dt:
+            x -= 300 * dt
+
+
+    if keys[pg.K_d] and x < (width - image_width- dt):
+            x += 300 * dt
+
+
+
     pg.display.flip()
     dt = clock.tick(60) / 1000
-
 pg.quit()
+
 
 
 ### scrap the box, instead of having an border right makke the whole screen the arena
 ## then just border around the whole screen, replace the heart with a rectangle, add pathtracking projectiles that you
-# have to dogde     
+# fuck coding bruh this is ass

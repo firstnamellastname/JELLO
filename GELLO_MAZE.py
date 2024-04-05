@@ -6,10 +6,6 @@ def hcf(a, b):
     while b:
         a, b = b, a % b
     return a
-#if input('blind mode y/n') == "y":
- #   blind_mode = True
-#else:
- #   blind_mode = False
 Tile_Multipler = 1
 pygame.init()
 window_resolution = 800, 600
@@ -141,8 +137,6 @@ def is_touched(x):
 def draw_walls():
     opposite_cord = 0
     line_color = 255, 0, 0
-#   if blind_mode == True:
-#       line_color = 0, 0, 0
     for z in range(window_resolution[0] // tile_width_height):
         global line_width
         cord_x = window_resolution[0] // 10
