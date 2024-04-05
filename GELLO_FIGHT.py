@@ -4,16 +4,17 @@ import random
 pg.init()
 print(random.randint(1,22))
 pg.display.set_caption("FIGHT FIGHT FIGHT")
-width = 1200
-height = 720
+screen_width = 1200
+screen_height = 720
+
 image_height = 40
 image_width = 40
 screen_colour = (0, 0, 0)
-screen = pg.display.set_mode((width, height))
+screen = pg.display.set_mode((screen_width, screen_height))
 hbox = 350
 vbox = 350
-x = width/2
-y = height/2
+x = screen_width/2
+y = screen_height/2
 
 clock = pg.time.Clock()
 
@@ -35,26 +36,22 @@ while running:
     heart_sprite = pg.image.load("Undertaleheart.png")
     IMAGE_SIZE = (image_width,image_height)
     heart_sprite = pg.transform.scale(heart_sprite, IMAGE_SIZE)
-    pg.draw.rect(screen, (0, 0, 0), (x, y, image_width, image_height))
+    heart_border = pg.draw.rect(screen, (0, 0, 0), (x, y, image_width, image_height))
+    fight_menu = pg.draw.rect(screen, (255, 255, 255),(0, 600, 1200, 200))
     screen.blit(heart_sprite, (x, y))
 
     keys = pg.key.get_pressed()
     if keys[pg.K_w] and y > dt:
-            y -= 300 * dt
+        y -= 300 * dt
 
-
-    if keys[pg.K_s] and y < (height - image_height - dt):
-            y += 300 * dt
-
+    if keys[pg.K_s] and y < (600 - image_height - dt):
+        y += 300 * dt
 
     if keys[pg.K_a] and x > dt:
-            x -= 300 * dt
+        x -= 300 * dt
 
-
-    if keys[pg.K_d] and x < (width - image_width- dt):
-            x += 300 * dt
-
-
+    if keys[pg.K_d] and x < (screen_width - image_width - dt):
+        x += 300 * dt
 
     pg.display.flip()
     dt = clock.tick(60) / 1000
