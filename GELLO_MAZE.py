@@ -6,6 +6,8 @@ def hcf(a, b):
     while b:
         a, b = b, a % b
     return a
+
+
 Tile_Multipler = 1
 pygame.init()
 window_resolution = 800, 600
@@ -26,7 +28,6 @@ player_pos = player_pos_x, player_pos_y
 goal_pos = goal_pos_x, goal_pos_y
 keys = pygame.key.get_pressed()
 tile_amount = window_resolution[0] // tile_width_height * (window_resolution[1] // tile_width_height)
-
 
 def set_borders(cords, direction):
     if direction == "right":
@@ -130,15 +131,16 @@ def generate_maze():
                 wall_generated = True
 
 
-def is_touched(x):
-    return x in touched
+# def is_touched(x):
+#     return x in touched
 
 
 def draw_walls():
     opposite_cord = 0
-    line_color = 255, 0, 0
+    line_color = 255, 255, 255
     for z in range(window_resolution[0] // tile_width_height):
         global line_width
+        should_draw = False
         cord_x = window_resolution[0] // 10
         cord_y = window_resolution[1] // 10
         posx = 0
@@ -151,7 +153,8 @@ def draw_walls():
                             break
                         should_draw = True
                     if should_draw:
-                        pygame.draw.line(window,line_color, (posx, opposite_cord + tile_width_height), (tile_width_height + posx, opposite_cord + tile_width_height), line_width)
+                        pygame.draw.line(window,line_color, (posx, opposite_cord + tile_width_height),
+                                         (tile_width_height + posx, opposite_cord + tile_width_height), line_width)
                 elif i == 2:
                     for coord in no_walls_tiles:
                         if (x, z) in coord and (x+1, z) in coord:
@@ -159,7 +162,8 @@ def draw_walls():
                             break
                         should_draw = True
                     if should_draw:
-                        pygame.draw.line(window, line_color, (posx + tile_width_height, opposite_cord), (posx + tile_width_height, opposite_cord + tile_width_height), line_width)
+                        pygame.draw.line(window, line_color, (posx + tile_width_height, opposite_cord),
+                                         (posx + tile_width_height, opposite_cord + tile_width_height), line_width)
             posx += tile_width_height
             line_width = stag_line_width
         for y in range(cord_y // 10 * 4 * Tile_Multipler):
@@ -187,7 +191,7 @@ def draw_tiles():
                 line_width = 0
                 rect_color = (0, 255, 0)
             elif player_pos_x == x and player_pos_y == z:
-                rect_color = (0, 0, 255)
+                rect_color = (255, 0, 0)
                 line_width = 0
             pygame.draw.rect(window, rect_color, (posx, opposite_cord, tile_width_height, tile_width_height), line_width)
             rect_color = rect_color_perma
@@ -200,7 +204,6 @@ def draw_tiles():
             posx += tile_width_height
             line_width = stag_line_width
         opposite_cord += tile_width_height
-        posx = 0
 
 
 generate_maze()
@@ -211,8 +214,6 @@ pygame.display.update()
 while True:
     player_pos = player_pos_x, player_pos_y
     if vic_royal():
-        score += 1
-        print('Your score is now', score)
         player_pos_x = 0
         player_pos_y = 0
         goal_pos_x = randint(0, border[0])
@@ -226,7 +227,6 @@ while True:
         pygame.display.update()
     for event in pygame.event.get():
         if event.type == QUIT:
-            print('You got a score of', score)
             pygame.quit()
             sys.exit()
         if event.type == pygame.KEYDOWN:
